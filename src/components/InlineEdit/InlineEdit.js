@@ -132,6 +132,7 @@ class InlineEdit extends React.Component {
   componentDidMount = () => {
     if (this.props.type === 'text') {
       this.attachKeyListeners()
+      this.attachKeyListeners()
       this.activateCopyToClipboard()
     }
     this.getStyles()
@@ -306,6 +307,14 @@ class InlineEdit extends React.Component {
     this._textValue.addEventListener('keypress', this.handleKeyPress)
     this._textValue.addEventListener('keyup', this.handleKeyUp)
   }
+
+  attachBlurListener = function () {
+    this._textValue.addEventListener('blur', event => {
+      event.preventDefault()
+      this.handleSave()
+    });
+  }
+
 
   handleKeyPress = event => {
     // Grabs the character code, even in FireFox
